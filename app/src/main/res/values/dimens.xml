@@ -8,5 +8,5 @@
 
 
     <dimen name="icon">120dp</dimen>
-    <dimen name="image">250dp</dimen>
+    <dimen name="image">270dp</dimen>
 </resources>
