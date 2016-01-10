@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         //setup array
         //for icon
-        int[] iconInts = {R.drawable.traffic_01, R.drawable.traffic_02, R.drawable.traffic_03,
+        final int[] iconInts = {R.drawable.traffic_01, R.drawable.traffic_02, R.drawable.traffic_03,
                 R.drawable.traffic_04, R.drawable.traffic_05, R.drawable.traffic_06,
                 R.drawable.traffic_07, R.drawable.traffic_08, R.drawable.traffic_09,
                 R.drawable.traffic_10, R.drawable.traffic_11, R.drawable.traffic_12,
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 R.drawable.traffic_16, R.drawable.traffic_17, R.drawable.traffic_18,
                 R.drawable.traffic_19, R.drawable.traffic_20};
         //for title
-        String[] titleStrings = new String[20]; //จองram for string 20 ตัว
+        final String[] titleStrings = new String[20]; //จองram for string 20 ตัว
         titleStrings[0] = "หัวข้อที่1";
         titleStrings[1] = "หัวข้อที่2";
         titleStrings[2] = "หัวข้อที่3";
@@ -68,11 +69,29 @@ public class MainActivity extends AppCompatActivity {
         titleStrings[19] = "หัวข้อที่20";
 
         //for detail เอาdataมาจาก my_data.xmlในvalue file
-        String[] detailStrings = getResources().getStringArray(R.array.data_short);
+        final String[] detailStrings = getResources().getStringArray(R.array.data_short);
 
         //create listview
         MyAdapter objMyAdapter = new MyAdapter(MainActivity.this, iconInts, titleStrings, detailStrings);
         trafficListView.setAdapter(objMyAdapter);
+
+        //active when click listview
+        trafficListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //intent detailActivity
+                Intent objIntent = new Intent(MainActivity.this, DetailActivity.class);
+
+                //put extra
+                objIntent.putExtra("Title", titleStrings[position]);
+                objIntent.putExtra("Image", iconInts[position]);
+                objIntent.putExtra("Index", position);
+
+                startActivity(objIntent);
+
+                }   //event
+        }); //event
 
     }   //listviewcontroller
 
