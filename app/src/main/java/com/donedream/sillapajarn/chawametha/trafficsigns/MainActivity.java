@@ -1,6 +1,8 @@
 package com.donedream.sillapajarn.chawametha.trafficsigns;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
                 MediaPlayer buttomMediaPlayer = MediaPlayer.create(getBaseContext(),
                         R.raw.end_game);
                 buttomMediaPlayer.start();
+
+                //intent to actionview ส่งไปหน้าใหม่
+                Intent objIntent = new Intent(Intent.ACTION_VIEW); //ถามbrowerไหนtoเปิดweb
+                objIntent.setData(Uri.parse("https://youtu.be/plWnm7UpsXk"));
+                startActivity (objIntent);
+
             }   // event
         });
 
